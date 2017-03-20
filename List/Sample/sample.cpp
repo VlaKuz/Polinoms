@@ -2,26 +2,27 @@
 #include "monom.h"
 void main()
 {
-	Polinom A, B;
+	Polinom polA, polB;
 
 	setlocale(LC_ALL, "Russian");
  	cout << "ввод A & B" << endl;
 
-	A.Enter();
-	B.Enter();
+	polA.Enter();
+	polB.Enter();
+	
+
+	cout << polA << endl;
+
+	cout << polB << endl;
+
 	cout << "операция: +, -, * " << endl;
-
-
-
-	cout << A << endl;
-
 	char op;
 	cin >> op;
 	CheckOperation(op);
 
-	Polinom C;
-	C = A.TypeChar(B, op);
+	Polinom polC;
+	polC = polA.TypeChar(polB, op);
 	
-	cout << "ответ = " << C << endl;
-	C.Clear();
+	cout << "ответ = " << polC << endl;
+	//polC.Clear();
 }

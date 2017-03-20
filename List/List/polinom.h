@@ -28,6 +28,7 @@ class Polinom
 public:
 	PNode* Head; //ук. на зв.
 
+
 	Polinom(); //констр. по ум.
 	Polinom(Polinom &); //констр. копир.
 	Polinom(PNode *); //констр. с пар-ром
@@ -162,10 +163,10 @@ void Polinom :: DeleteMons()
 }/*---------------------------------------------------------------*/
 void Polinom :: DeleteMonWithPos(PNode *&pos)
 {
-	/*PNode *temp = pos; 
+	PNode *temp = pos; 
 	pos->next = temp->next;
-	delete temp;*/
-	if ((pos) && (Head!=0))
+	delete temp;
+	/*if ((pos) && (Head!=0))
 	{
 		PNode* node=pos->next->next;
 		delete pos->next;
@@ -173,7 +174,7 @@ void Polinom :: DeleteMonWithPos(PNode *&pos)
 
 	}
 	else
-		throw 1;
+		throw 1;*/
 }/*---------------------------------------------------------------*/
 void CheckOperation(char oper) //проверка верно введеной операции
 {
@@ -209,6 +210,7 @@ Polinom Polinom ::  Enter() //создается моном и вставляется в полином
 		MonA.MonomMake();
 		this->AddWithBeginMon(MonA);
 		int couts;
+		cout<<"1.end"<<endl<<"2.continue"<<endl;
 		cin >> couts;
 		if (couts != 2)
 		flag = false;
@@ -284,11 +286,9 @@ Polinom& Polinom :: operator=(const Polinom &PolA)
 Polinom Polinom :: operator + (const Polinom& PolA) const
 {
 	Polinom Res;
-	Polinom Res1;
 	PNode* Current_this = this->Head;
 	PNode* Current_PolA = PolA.Head;
 	PNode* Current_Res;
-	PNode* Current_Res1;
 
 	if (this->Head == 0) //зис пустой
 	{

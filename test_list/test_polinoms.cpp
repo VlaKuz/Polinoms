@@ -197,6 +197,22 @@ TEST(List, operation_plus) {
 	EXPECT_EQ(6, TestPolinomC.Head->next->Mon.coef);
 }
 
+TEST(List, operation_plus1) {
+	Polinom TestPolinomA;
+	TestPolinomA.AddWithBeginMon(Monom(2, 3, 0, 0));
+	TestPolinomA.AddWithBeginMon(Monom(1, 1, 0, 0));
+	Polinom TestPolinomB;
+	TestPolinomB.AddWithBeginMon(Monom(1, 3, 0, 0));
+	TestPolinomB.AddWithBeginMon(Monom(2, 0, 2, 0));
+	Polinom TestPolinomC;
+	
+	TestPolinomC = TestPolinomA + TestPolinomB;
+
+	EXPECT_EQ(2, TestPolinomC.Head->Mon.coef);
+	EXPECT_EQ(1, TestPolinomC.Head->next->Mon.coef);
+	EXPECT_EQ(3, TestPolinomC.Head->next->next->Mon.coef);
+}
+
 TEST(List, operation_minus) {
 	Polinom TestPolinomA;
 	TestPolinomA.AddWithBeginMon(Monom(2, 2, 1, 2));
@@ -210,6 +226,22 @@ TEST(List, operation_minus) {
 
 	EXPECT_EQ(0, TestPolinomC.Head->Mon.coef);
 	EXPECT_EQ(-2, TestPolinomC.Head->next->Mon.coef);
+}
+
+TEST(List, operation_minus2) {
+	Polinom TestPolinomA;
+	TestPolinomA.AddWithBeginMon(Monom(2, 3, 0, 0));
+	TestPolinomA.AddWithBeginMon(Monom(1, 1, 0, 0));
+	Polinom TestPolinomB;
+	TestPolinomB.AddWithBeginMon(Monom(1, 3, 0, 0));
+	TestPolinomB.AddWithBeginMon(Monom(2, 0, 2, 0));
+	Polinom TestPolinomC;
+	
+	TestPolinomC = TestPolinomA - TestPolinomB;
+
+	EXPECT_EQ(-2, TestPolinomC.Head->Mon.coef);
+	EXPECT_EQ(1, TestPolinomC.Head->next->Mon.coef);
+	EXPECT_EQ(1, TestPolinomC.Head->next->next->Mon.coef);
 }
 
 TEST(List, equal_polinom){
@@ -240,6 +272,23 @@ TEST(List, mult_polinom_with_polinom){
 
 	EXPECT_EQ(7, TestPolinomC.Head->Mon.step[0]);
 	EXPECT_EQ(6, TestPolinomC.Head->next->Mon.step[0]);
+	EXPECT_EQ(8, TestPolinomC.Head->next->next->Mon.step[0]);
+}
+
+TEST(List, mult_polinom_with_polinom1){
+	Polinom TestPolinomA;
+	TestPolinomA.AddWithBeginMon(Monom(2, 4, 0, 0));
+	TestPolinomA.AddWithBeginMon(Monom(5, 3, 0, 0));
+	Polinom TestPolinomB(TestPolinomA);
+	Polinom TestPolinomC(TestPolinomA*TestPolinomB);
+
+
+	EXPECT_EQ(25, TestPolinomC.Head->Mon.coef);
+	EXPECT_EQ(20, TestPolinomC.Head->next->Mon.coef);
+	EXPECT_EQ(4, TestPolinomC.Head->next->next->Mon.coef);
+
+	EXPECT_EQ(6, TestPolinomC.Head->Mon.step[0]);
+	EXPECT_EQ(7, TestPolinomC.Head->next->Mon.step[0]);
 	EXPECT_EQ(8, TestPolinomC.Head->next->next->Mon.step[0]);
 }
 
@@ -283,6 +332,7 @@ TEST(List, Can_add_monom_first){
 
 	EXPECT_EQ(TestMonomA, TestPolinomA.Head->Mon);
 }
+
 TEST(List, Can_add_monom_last){
 	Monom TestMonomA(3, 2, 1, 2);
 	Monom TestMonomB(1.1, 2, 2, 2);
@@ -293,6 +343,7 @@ TEST(List, Can_add_monom_last){
 	TestPolinomA.AddWithLastMon(current, TestMonomB);
 	EXPECT_EQ(1.1, TestPolinomA.Head->next->Mon.coef);
 }
+
 TEST(List, Can_add_monom_middle){
 	Monom TestMonomA(3, 2, 1, 2);
 	Monom TestMonomB(1.1, 2, 2, 2);
